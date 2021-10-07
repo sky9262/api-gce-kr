@@ -20,7 +20,7 @@ router.post('/signup', [
     if (!errors.isEmpty()) {
       return res.status(400).json({ "msg": errors.array() });
     }
-    if(sha256(req.body.secret_code).toUpperCase() != process.ev.SECTRET_CODE) {
+    if(sha256(req.body.secret_code).toUpperCase() != process.env.SECTRET_CODE) {
         return res.status(401).json({ "msg": "Wrong secret code!!"});
       }
     //check wether user exists already
