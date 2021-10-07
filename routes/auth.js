@@ -75,7 +75,7 @@ router.post('/login', [
                 id: user.id
             }
         }
-        const authToken = jwt.sign(data, process.ev.JWT_SECTRET);
+        const authToken = jwt.sign(data, process.env.JWT_SECTRET);
 
         res.json({"msg": `Login sucessfully as ${user.name}!`,authToken, "name":`${user.name}`,image:`${user.image}`}); 
 
