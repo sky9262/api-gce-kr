@@ -21,14 +21,14 @@ router.post('/add', fetchuser, [
     body('name', "Teammate name must be atleast 5 character.").isLength({ min: 5 }),
 ], async (req, res)=>{
     try {
-        const  {name, image2, post_name, image1, post_place, facebook, portfolio, instagram, telegram, linkedin, email, campus_profile} = req.body;
+        const  {name, image2, post_name, image1, post_place, facebook, portfolio, instagram, telegram, linkedin, email, campus_profile, github} = req.body;
         // if there are error, return bad req and the error
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
         const teamData = new Team ({
-            name, image2, post_name, image1, post_place, facebook, portfolio, instagram, telegram, linkedin, email, campus_profile, user : req.user.id
+            name, image2, post_name, image1, post_place, facebook, portfolio, instagram, telegram, linkedin, email, campus_profile, github, user : req.user.id
         })
         const AddedTeamData = await teamData.save();
         res.json({"msg": "New team added sucessfully!!", AddedTeamData})
@@ -41,7 +41,7 @@ router.post('/add', fetchuser, [
 //ROUTE 3: Update a existing data of team using PUT "/api/team/update". Login require
 router.put('/update/:id', fetchuser, async (req, res)=>{
     try {
-        const  {name, image2, post_name, image1, post_place, facebook, portfolio, instagram, telegram, linkedin, email, campus_profile} = req.body;
+        const  {name, image2, post_name, image1, post_place, facebook, portfolio, instagram, telegram, linkedin, email, campus_profile, github} = req.body;
 
         // Create a new data to update team
         const newTeam = {};
@@ -57,6 +57,7 @@ router.put('/update/:id', fetchuser, async (req, res)=>{
         if(linkedin){newTeam.linkedin = linkedin};
         if(email){newTeam.email = email};
         if(campus_profile){newTeam.campus_profile = campus_profile};
+        if(github){newTeam.github = github};
 
         // find the node to be updated and update it
         let team = await Team.findById(req.params.id);

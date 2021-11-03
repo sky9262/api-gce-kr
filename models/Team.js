@@ -45,6 +45,9 @@ const TeamSchema = new Schema({
     campus_profile:{
         type:String
     },
+    github:{
+        type:String
+    },
   });
 
   module.exports = mongoose.model('team',TeamSchema);
