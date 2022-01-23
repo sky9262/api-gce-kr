@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-const JWT_SECTRET = 'GCE-KR_CreatedByAkashKumarSrivastava'
+const JWT_SECTRET = process.env.JWT_SECTRET
 
 const fetchuser = (req, res, next)=>{
     //Get the user from the jwt token and add it to req obj
